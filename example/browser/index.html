@@ -1,11 +1,62 @@
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Megalodon</title>
-    <script type="module" src="./src/index.ts"></script>
+    <script type="module">
+      import { detect } from "./src/index.ts"
+
+      const detectButton = document.getElementById("detect")
+      const result = document.getElementById("result")
+
+      // add event listener to detect button. When click, detect Fediverse server from url input
+      detectButton.addEventListener("click", async () => {
+        const url = document.getElementById("url").value
+        const server = await detect(url)
+        if (server) {
+          result.innerHTML = `<p>Detected: ${server}</p>`
+        } else {
+          result.innerHTML = "<p>Not detected</p>"
+        }
+      })
+    </script>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 1em;
+        background-color: #1E2024;
+        color: #fff;
+        text-align: center;
+      }
+      a {
+        color: #11A3EF !important;
+      }
+      input {
+        padding: 0.5em;
+        font-size: 1.5em;
+        border-radius: 0.5em;
+        border: 2px solid #2B2E33;
+        background-color: #5D5D6A;
+        color: #fff;
+      }
+      button {
+        padding: 0 1em;
+        font-size: 1.5em;
+        border-radius: 0.5em;
+        border: 2px solid #606060;
+        background: linear-gradient(0deg, #2B2E33, #434C55);
+        color: #fff;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
+    <h1><a href="https://h3poteto.github.io/megalodon/">Megalodon</a> browser example</h1>
+    <h2>Input Fediverse server URL below:</h2>
+    <input type="text" id="url" placeholder="https://mastodon.social" />
+    <p>Please include <code>https://</code></p>
+    <button id="detect"><p>Detect</p></button>
+    <div id="result"></div>
   </body>
 </html>

@@ -32,15 +32,18 @@ export default defineConfig({
       }
     })
   ],
+  optimizeDeps: {
+    exclude: ['https-proxy-agent', 'socks-proxy-agent']
+  },
   build: {
     plugins: [
-      nodePolyfills({
-        // https-proxy-agent and socks-proxy-agent is node library, so can't compile for browser.
-        include: ['net', 'tls', 'dns']
-      }),
-      commonjs({
-        extensions: ['.mjs', '.js', '.ts']
-      })
+      // nodePolyfills({
+      //   // https-proxy-agent and socks-proxy-agent is node library, so can't compile for browser.
+      //   include: ['net', 'tls', 'dns']
+      // }),
+      // commonjs({
+      //   extensions: ['.mjs', '.js', '.ts']
+      // })
     ],
   }
 })
