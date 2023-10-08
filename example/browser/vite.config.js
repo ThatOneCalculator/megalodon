@@ -3,8 +3,6 @@ import path from 'path'
 import envCompatible from 'vite-plugin-env-compatible'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
-import { nodePolyfills } from 'vite-plugin-node-polyfills'
-import commonjs from 'vite-plugin-commonjs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -33,17 +31,8 @@ export default defineConfig({
     })
   ],
   optimizeDeps: {
+    // https-proxy-agent and socks-proxy-agent is node library, so can't compile for browser.
     exclude: ['https-proxy-agent', 'socks-proxy-agent']
   },
-  build: {
-    plugins: [
-      // nodePolyfills({
-      //   // https-proxy-agent and socks-proxy-agent is node library, so can't compile for browser.
-      //   include: ['net', 'tls', 'dns']
-      // }),
-      // commonjs({
-      //   extensions: ['.mjs', '.js', '.ts']
-      // })
-    ],
-  }
+  build: {}
 })
