@@ -11,6 +11,7 @@ app.post('/proxy', async (req, res) => {
   try {
     const { url } = req.body
     const response = await axios.get(url)
+    console.log('Proxying: ' + url)
 
     res.status(response.status).send(response.data)
   } catch (error) {

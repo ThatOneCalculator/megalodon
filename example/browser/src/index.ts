@@ -1,8 +1,10 @@
 const detector = require('megalodon').detector
+// import { detector } from "megalodon";
 // const generator = require('megalodon').default
 
 export async function detect(url: string) {
-  const result = await detector(url);
+  console.log("here")
+  const result = await detector(url, false);
   return result;
 }
 
